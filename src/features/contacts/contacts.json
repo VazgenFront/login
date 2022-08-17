@@ -1,0 +1,36 @@
+{
+  "contacts": [
+    {
+      "name": "John",
+      "surname": "Example",
+      "age": 22,
+      "isMale": true,
+      "city": "Moscow",
+      "phoneNumber": "+7 (926)-989-717-17"
+    },
+    {
+      "name": "Alyona",
+      "surname": "Smirnova",
+      "age": 33,
+      "isMale": false,
+      "city": "St. Petergburg",
+      "phoneNumber": "+7 (226)-132-717-17"
+    },
+    {
+      "name": "Hayk",
+      "surname": "Aslanyan",
+      "age": 42,
+      "isMale": true,
+      "city": "Yerevan",
+      "phoneNumber": "+(374)-989-717-17"
+    },
+    {
+      "name": "Mike",
+      "surname": "Jordon",
+      "age": 69,
+      "isMale": true,
+      "city": "Washington DC",
+      "phoneNumber": "+7 (926)-989-717-17"
+    }
+  ]
+}
