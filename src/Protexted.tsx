@@ -1,14 +1,9 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-interface StoreInterface {
-  posts: {
-    isAuth: boolean;
-  };
-}
+import { StoreInterface } from "./interfaces";
 
 export const PrivateWrapper = ({ children }: { children: JSX.Element }) => {
-  const isAuth = useSelector((state: StoreInterface) => state.posts.isAuth);
+  const isAuth = useSelector((state: StoreInterface) => state.login.isAuth);
 
   return isAuth ? children : <Navigate to="/" replace />;
 };

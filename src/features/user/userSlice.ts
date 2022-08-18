@@ -1,10 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-interface UserInfo {
-  login: string;
-  password: string;
-  isAuth: boolean;
-}
+import { UserInfo } from "../../interfaces";
 
 const initialState: UserInfo = {
   login: "",
@@ -20,7 +15,7 @@ export const makeLogin = createAsyncThunk(
 );
 
 export const userLogin = createSlice({
-  name: "posts",
+  name: "login",
   initialState,
   reducers: {
     auth: (state, action) => {
