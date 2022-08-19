@@ -1,31 +1,19 @@
 import { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { Contact } from "../components/Contact";
+import NewContact from "../components/NewContact";
 import {
   getContacts,
   onAddContact,
   onSaveContact,
+  setContacts,
 } from "../features/contacts/contactsSlice";
 import { ContactInterface, stateInterface } from "../interfaces";
 import { AppDispatch } from "../store/store";
-import { Contact } from "../components/Contact";
-import {
-  Table,
-  Th,
-  Tr,
-  AddContact,
-  Container,
-  NewContact,
-  SaveButton,
-  SaveButtonBox,
-  ErrorText,
-  Columns
-} from "./styles.d";
+import { AddContact, Container, ErrorText, Table, Th, Tr } from "./styles.d";
 
 const Contacts = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const [newContact, setNewContact] = useState<Partial<ContactInterface>>({});
-  const [hasError, setHasError] = useState(false);
   const contacts = useSelector(
     (state: stateInterface) => state.contacts.contacts
   );
@@ -34,9 +22,9 @@ const Contacts = () => {
     (state: stateInterface) => state.contacts.isAddingContact
   );
 
-  useEffect(() => {
-    dispatch(getContacts());
-  }, []);
+  const dispatch = useDispatch<AppDispatch>();
+  const [newContact, setNewContact] = useState<Partial<ContactInterface>>({});
+  const [hasError, setHasError] = useState(false);
 
   const handleAddContact = () => {
     dispatch(onAddContact());
@@ -45,8 +33,14 @@ const Contacts = () => {
       setNewContact(() => {
         return {};
       });
+
+      setHasError(false);
     }
   };
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, []);
 
   const isCorrect =
     newContact.name &&
@@ -55,7 +49,7 @@ const Contacts = () => {
     newContact.phoneNumber &&
     newContact.city;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNewContact((prev) => {
       const { name, value } = e.target;
 
@@ -81,8 +75,24 @@ const Contacts = () => {
     }
   };
 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const letter = e.target.value.toLocaleLowerCase();
+    const example = contacts.filter(
+      (item: ContactInterface) =>
+        item.name.toLocaleLowerCase().includes(letter) ||
+        item.surname.toLocaleLowerCase().includes(letter)
+    );
+
+    if (letter) {
+      dispatch(setContacts(example));
+    } else {
+      dispatch(setContacts([]));
+    }
+  };
+
   return (
     <Container>
+      <input type="text" placeholder="search contact" onChange={handleSearch} />
       <Table className="container">
         <thead>
           <Tr>
@@ -93,7 +103,7 @@ const Contacts = () => {
               <h1>Surname</h1>
             </Th>
             <Th>
-              <h1>age</h1>
+              <h1>Age</h1>
             </Th>
             <Th>
               <h1>Phone Number</h1>
@@ -120,52 +130,14 @@ const Contacts = () => {
         </tbody>
       </Table>
       {isAdding && (
-        <NewContact>
-          <Columns>
-            <input
-              name="name"
-              onChange={handleChange}
-              placeholder="name"
-              type="text"
-              required={true}
-            />
-            <input
-              name="surname"
-              onChange={handleChange}
-              placeholder="surname"
-              type="text"
-              required={true}
-            />
-            <input
-              name="age"
-              onChange={handleChange}
-              placeholder="age"
-              type="text"
-              required={true}
-            />
-            <input
-              name="phoneNumber"
-              onChange={handleChange}
-              placeholder="phoneNumber"
-              type="text"
-              required={true}
-            />
-            <input
-              name="city"
-              onChange={handleChange}
-              placeholder="city"
-              type="text"
-              required={true}
-            />
-          </Columns>
-          <SaveButtonBox>
-            <SaveButton onClick={handleSaveContact}>Save</SaveButton>
-          </SaveButtonBox>
-        </NewContact>
+        <NewContact
+          handleSave={handleSaveContact}
+          handleChange={handleChange}
+        />
       )}
-      {hasError && <ErrorText>All inputs must be filled</ErrorText>}
+      {hasError && isAdding && <ErrorText>All inputs must be filled</ErrorText>}
       <AddContact onClick={handleAddContact}>
-        {isAdding ? "NO" : "Add Contact"}
+        {isAdding ? "Cancel" : "Add Contact"}
       </AddContact>
     </Container>
   );

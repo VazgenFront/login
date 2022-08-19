@@ -39,3 +39,39 @@ export const InputButton = styled.input`
   color: dodgerblue;
   background-color: white;
 `;
+
+export const NewContactWrapper = styled.div`
+  width: 80%;
+`;
+
+export const Columns = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  & > input {
+    width: 20%;
+    height: 30px;
+    background: #323c50;
+    color: #fff;
+
+    ::placeholder,
+    ::-webkit-input-placeholder {
+      color: #fff;
+    }
+  }
+`;
+
+export const SaveButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const SaveButton = styled.button`
+  width: 200px;
+  height: 30px;
+  background: green;
+  color: #fff;
+  border: 2px solid green;
+  margin-top: 12px;
+`;

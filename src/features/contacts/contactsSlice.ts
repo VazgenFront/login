@@ -3,8 +3,9 @@ import { ContactInterface } from "../../interfaces";
 import contact from "./contacts.json";
 
 const initialState = {
-  contacts: [],
+  contacts: contact,
   isAddingContact: false,
+  searchingContacts: [],
 };
 
 export const getContacts = createAsyncThunk(
@@ -19,7 +20,11 @@ export const contacts = createSlice({
   initialState,
   reducers: {
     setContacts: (state, action) => {
-      state.contacts = action.payload;
+      if (action.payload.length) {
+        state.contacts = action.payload;
+      } else {
+        state.contacts = initialState.contacts;
+      }
     },
 
     removeHandler: (state, action) => {

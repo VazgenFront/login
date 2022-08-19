@@ -15,9 +15,8 @@ export interface ContactInterface {
   name: string;
   surname: string;
   age: number;
-  isMale: boolean;
   phoneNumber: string;
-  id: number;
+  id?: number;
   city: string;
 }
 

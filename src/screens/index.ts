@@ -1,4 +1,4 @@
 import LoginPage from "./LoginPage";
-import Contacts from "./Contacts";
+import Contacts from "./ContactsPage";
 
 export { LoginPage, Contacts };

@@ -14,7 +14,7 @@ export const Th = styled.th`
     font-weight: bold;
     font-size: 1em;
     text-align: left;
-    color: #185875;
+    color: #fff;
     text-align: center;
   }
 `;
@@ -80,38 +80,12 @@ export const AddContact = styled.button`
   height: 30px;
   background: green;
   border: 2px solid green;
+  cursor: pointer;
   color: #fff;
 `;
 
 export const NewContact = styled.div`
   width: 80%;
-`;
-
-export const SaveButton = styled.button`
-  width: 200px;
-  height: 30px;
-  background: green;
-  color: #fff;
-  border: 2px solid green;
-  margin-top: 12px;
-`;
-
-export const Columns = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  & > input {
-    width: 20%;
-    height: 30px;
-    background: #323c50;
-    color: #fff;
-  }
-`;
-
-export const SaveButtonBox = styled.div`
-  display: flex;
-  justify-content: center;
 `;
 
 export const ErrorText = styled.p`

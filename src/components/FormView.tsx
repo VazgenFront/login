@@ -10,22 +10,20 @@ const FormView = ({ data, change, submit }: any) => (
       <Input
         type="text"
         name={input1}
-        id={input1}
         placeholder={input1}
         value={data.email}
         onChange={change}
         borderColor="none"
       />
       <Input
-        type="text"
+        type="password"
         name={input2}
-        id={input2}
         placeholder={input2}
         value={data.password}
         onChange={change}
         borderColor="none"
       />
-      <InputButton type="submit" id="submit" onClick={submit} />
+      <InputButton type="submit" onClick={submit} />
     </Form>
   </FormWrapper>
 );
